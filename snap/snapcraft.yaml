@@ -1,0 +1,64 @@
+name: linux-generic-allwinner
+adopt-info: kernel
+summary: The Ubuntu generic Linux kernel for allwinner
+description: This Ubuntu generic Linux kernel built for the allwinner architecture
+grade: stable
+confinement: strict
+type: kernel
+
+parts:
+  firmware:
+    plugin: nil
+    source: git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+    source-depth: 1
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/firmware
+      cp -av ./* $SNAPCRAFT_PART_INSTALL/firmware/
+  kernel:
+    plugin: kernel
+    source: git://kernel.ubuntu.com/ubuntu/ubuntu-bionic.git
+    source-type: git
+    source-depth: 1
+    source-tag: Ubuntu-4.15.0-34.37
+    kconfigflavour: generic
+    kconfigs:
+      - CONFIG_DEBUG_INFO=n
+      - CONFIG_ARCH_SUNXI=y
+      - CONFIG_AHCI_SUNXI=y
+      - CONFIG_RESET_SUNXI=y
+      - CONFIG_SUNXI_SRAM=y
+      - CONFIG_DWMAC_SUNXI=m
+      - CONFIG_IR_SUNXI=m
+      - CONFIG_MMC_SUNXI=y
+      - CONFIG_NET_VENDOR_ALLWINNER=y
+      - CONFIG_NVMEM_SUNXI_SID=y
+      - CONFIG_PINCTRL_SUNXI=y
+      - CONFIG_RTC_DRV_SUNXI=y
+      - CONFIG_SUNXI_CCU=y
+      - CONFIG_SUNXI_CCU_DIV=y
+      - CONFIG_SUNXI_CCU_FRAC=y
+      - CONFIG_SUNXI_CCU_GATE=y
+      - CONFIG_SUNXI_CCU_MP=y
+      - CONFIG_SUNXI_CCU_MULT=y
+      - CONFIG_SUNXI_CCU_MUX=y
+      - CONFIG_SUNXI_CCU_NK=y
+      - CONFIG_SUNXI_CCU_NKM=y
+      - CONFIG_SUNXI_CCU_NKMP=y
+      - CONFIG_SUNXI_CCU_NM=y
+      - CONFIG_SUNXI_CCU_PHASE=y
+      - CONFIG_SUNXI_RSB=y
+      - CONFIG_SUNXI_WATCHDOG=y
+      - CONFIG_SUN8I_EMAC=y
+    override-pull: |
+      snapcraftctl pull
+      set -e
+      echo "applying sun8i-emac.patch"
+      git apply ../../../patches/sun8i-emac.patch
+      echo "setting version to $(git tag|sed 's/^Ubuntu-//')"
+      snapcraftctl set-version "$(git tag|sed 's/^Ubuntu-//')"
+    override-build: |
+      cp debian/scripts/retpoline-extract-one \
+        $SNAPCRAFT_PART_BUILD/scripts/ubuntu-retpoline-extract-one
+      snapcraftctl build
+    kernel-with-firmware: false
+    after: [ firmware ]
