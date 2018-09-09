@@ -61,4 +61,6 @@ parts:
         $SNAPCRAFT_PART_BUILD/scripts/ubuntu-retpoline-extract-one
       snapcraftctl build
     kernel-with-firmware: false
+    build-packages:
+      - libssl-dev
     after: [ firmware ]
