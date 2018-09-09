@@ -48,12 +48,9 @@ parts:
       - CONFIG_SUNXI_CCU_PHASE=y
       - CONFIG_SUNXI_RSB=y
       - CONFIG_SUNXI_WATCHDOG=y
-      - CONFIG_SUN8I_EMAC=y
+      - CONFIG_DWMAC_SUN8I=m
     override-pull: |
       snapcraftctl pull
-      set -e
-      echo "applying sun8i-emac.patch"
-      git apply ../../../patches/sun8i-emac.patch
       echo "setting version to $(git tag|sed 's/^Ubuntu-//')"
       snapcraftctl set-version "$(git tag|sed 's/^Ubuntu-//')"
     override-build: |
