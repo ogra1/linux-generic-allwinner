@@ -62,5 +62,6 @@ parts:
       snapcraftctl build
     kernel-with-firmware: false
     build-packages:
+      - cpio
       - libssl-dev
     after: [ firmware ]
