@@ -25,7 +25,6 @@ parts:
     source-tag: Ubuntu-4.15.0-34.37
     kconfigflavour: generic
     kconfigs:
-      - CONFIG_DEBUG_INFO=n
       - CONFIG_AHCI_SUNXI=y
       - CONFIG_ARCH_SUNXI=y
       - CONFIG_CAN_SUN4I=m
