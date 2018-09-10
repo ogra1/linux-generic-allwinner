@@ -17,11 +17,6 @@ parts:
       # fix for nanopi-neo-air wlan
       cp $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.AP6212.txt \
         $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.txt
-      echo "installing xradio xr819 firmware"
-      git clone https://github.com/armbian/firmware.git armbian
-      cp -av armbian/xr819 $SNAPCRAFT_PART_INSTALL/firmware/
-    build-packages:
-      - git
   kernel:
     plugin: kernel
     source: git://kernel.ubuntu.com/ubuntu/ubuntu-bionic.git
@@ -130,3 +125,12 @@ parts:
       - cpio
       - libssl-dev
     after: [ firmware ]
+  xradio-driver:
+    plugin: nil
+    override-build: |
+      echo "installing xradio xr819 firmware"
+      git clone https://github.com/armbian/firmware.git armbian
+      cp -av armbian/xr819 $SNAPCRAFT_PART_INSTALL/firmware/
+    build-packages:
+      - git
+    after: [ kernel ]
