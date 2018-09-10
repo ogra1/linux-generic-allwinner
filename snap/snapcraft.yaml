@@ -15,7 +15,7 @@ parts:
       mkdir -p $SNAPCRAFT_PART_INSTALL/firmware
       cp -av ./* $SNAPCRAFT_PART_INSTALL/firmware/
       # fix for nanopi-neo-air wlan
-      cp $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.AP6212.txt \
+      cp -av $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.AP6212.txt \
         $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.txt
   kernel:
     plugin: kernel
