@@ -126,11 +126,31 @@ parts:
       - libssl-dev
     after: [ firmware ]
   xradio-driver:
+    source: https://github.com/fifteenhex/xradio.git
+    source-depth: 1
     plugin: nil
     override-build: |
+      if [ "$(arch)" != "armv7l" ]; then
+        export ARCH=arm
+        export CROSS_COMPILE=arm-linux-gnueabihf-
+      fi
+      export INSTALL_MOD_PATH=$SNAPCRAFT_PART_INSTALL
+      make -C ../../kernel/build M=$PWD modules
+      make -C ../../kernel/build M=$PWD modules_install
+      mv $SNAPCRAFT_PART_INSTALL/lib/modules $SNAPCRAFT_PART_INSTALL
+      rm -rf $SNAPCRAFT_PART_INSTALL/lib \
+        $SNAPCRAFT_PART_INSTALL/modules/*/modules.*
       echo "installing xradio xr819 firmware"
-      git clone https://github.com/armbian/firmware.git armbian
-      cp -av armbian/xr819 $SNAPCRAFT_PART_INSTALL/firmware/
+      svn checkout https://github.com/armbian/firmware/trunk/xr819 \
+        $SNAPCRAFT_PART_INSTALL/firmware/xr819
+    override-prime: |
+      snapcraftctl prime
+      VERSION="$(ls System.map-*|sed 's/^.*-//')"
+      mkdir lib && ln -s ../modules lib/modules
+      depmod -b . -e -F System.map-$VERSION $VERSION
+      rm -rf lib modules/*/source
     build-packages:
-      - git
+      - subversion
+      - on amd64 to armhf:
+        - gcc-arm-linux-gnueabihf:amd64
     after: [ kernel ]
