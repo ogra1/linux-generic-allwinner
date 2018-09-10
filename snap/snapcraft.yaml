@@ -14,10 +14,12 @@ parts:
     override-build: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/firmware
       cp -av ./* $SNAPCRAFT_PART_INSTALL/firmware/
-      echo "overlaying armbian firmware"
+      # fix for nanopi-neo-air wlan
+      cp $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.AP6212.txt \
+        $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.txt
+      echo "installing xradio xr819 firmware"
       git clone https://github.com/armbian/firmware.git armbian
       cp -av armbian/xr819 $SNAPCRAFT_PART_INSTALL/firmware/
-      #cp -av armbian/ap6212/fw_bcm43438a1.bin $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.bin
     build-packages:
       - git
   kernel:
