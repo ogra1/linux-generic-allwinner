@@ -1,5 +1,5 @@
 diff --git a/arch/arm/boot/dts/sun8i-h3-nanopi-neo-air.dts b/arch/arm/boot/dts/sun8i-h3-nanopi-neo-air.dts
-index 03ff6f8..9f3f95c 100644
+index 03ff6f8..4363e99 100644
 --- a/arch/arm/boot/dts/sun8i-h3-nanopi-neo-air.dts
 +++ b/arch/arm/boot/dts/sun8i-h3-nanopi-neo-air.dts
 @@ -45,6 +45,7 @@
@@ -72,3 +72,26 @@ index 03ff6f8..9f3f95c 100644
  };
  
  &uart0 {
+@@ -90,6 +133,22 @@
+ 	status = "okay";
+ };
+ 
++&ehci0 {
++       status = "okay";
++};
++
++&emac {
++    phy-handle = <&int_mii_phy>;
++    phy-mode = "mii";
++    allwinner,leds-active-low;
++    status = "okay";
++};
++
++&usb_otg {
++    dr_mode = "otg";
++    status = "okay";
++};
++
+ &usbphy {
+ 	/* USB VBUS is always on */
+ 	status = "okay";
