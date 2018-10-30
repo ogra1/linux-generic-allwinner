@@ -6,6 +6,10 @@ grade: stable
 confinement: strict
 type: kernel
 
+architectures:
+  - build-on: armhf
+    run-on: armhf
+
 parts:
   firmware:
     plugin: nil

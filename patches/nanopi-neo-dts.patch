@@ -23,7 +23,7 @@ index 7646e33..ab84b48 100644
  
 +&usb_otg {
 +    status = "okay";
-+    dr_mode = "otg";
++    dr_mode = "peripherial";
 +};
 +
  &usbphy {
