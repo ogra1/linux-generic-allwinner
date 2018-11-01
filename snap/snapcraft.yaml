@@ -11,16 +11,6 @@ architectures:
     run-on: armhf
 
 parts:
-  firmware:
-    plugin: nil
-    source: git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-    source-depth: 1
-    override-build: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/firmware
-      cp -av ./* $SNAPCRAFT_PART_INSTALL/firmware/
-      # fix for nanopi-neo-air wlan
-      cp -av $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.AP6212.txt \
-        $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.txt
   kernel:
     plugin: kernel
     source: git://kernel.ubuntu.com/ubuntu/ubuntu-bionic.git
@@ -236,7 +226,6 @@ parts:
     build-packages:
       - cpio
       - libssl-dev
-    after: [ firmware ]
   xradio-driver:
     source: https://github.com/fifteenhex/xradio.git
     source-depth: 1
@@ -268,3 +257,15 @@ parts:
       - on amd64 to armhf:
         - gcc-arm-linux-gnueabihf:amd64
     after: [ kernel ]
+  firmware:
+    plugin: nil
+    source: git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+    source-depth: 1
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/firmware
+      cp -av ./* $SNAPCRAFT_PART_INSTALL/firmware/
+      # fix for nanopi-neo-air wlan
+      cp -av $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.AP6212.txt \
+        $SNAPCRAFT_PART_INSTALL/firmware/brcm/brcmfmac43430-sdio.txt
+    after: [ xradio-driver ]
+
