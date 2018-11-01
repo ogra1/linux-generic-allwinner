@@ -226,6 +226,10 @@ parts:
     override-build: |
       cp debian/scripts/retpoline-extract-one \
         $SNAPCRAFT_PART_BUILD/scripts/ubuntu-retpoline-extract-one
+      if [ "$(arch)" != "armv7l" ]; then
+        export ARCH=arm
+        export CROSS_COMPILE=arm-linux-gnueabihf-
+      fi
       snapcraftctl build
     kernel-with-firmware: false
     kernel-initrd-modules:
@@ -236,6 +240,8 @@ parts:
     build-packages:
       - cpio
       - libssl-dev
+      - on amd64 to armhf:
+        - gcc-arm-linux-gnueabihf:amd64
     after: [ firmware ]
   xradio-driver:
     source: https://github.com/fifteenhex/xradio.git
