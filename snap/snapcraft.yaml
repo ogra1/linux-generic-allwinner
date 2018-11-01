@@ -10,6 +10,10 @@ architectures:
   - build-on: amd64
     run-on: armhf
 
+environment:
+  ARCH: arm
+  CROSS_COMPILE: arm-linux-gnueabihf-
+
 parts:
   firmware:
     plugin: nil
