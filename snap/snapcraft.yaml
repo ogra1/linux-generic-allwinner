@@ -221,6 +221,7 @@ parts:
       echo "applying nanopi devicetree patches"
       git apply -v ../../../patches/nanopi-air-wlan.patch
       git apply -v ../../../patches/nanopi-neo-dts.patch
+      git apply -v ../../../patches/nanopi-mac-addr.patch
       echo "setting version to $(git tag|sed 's/^Ubuntu-//')"
       snapcraftctl set-version "$(git tag|sed 's/^Ubuntu-//')"
     override-build: |

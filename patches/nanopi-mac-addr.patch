@@ -1,0 +1,12 @@
+diff --git a/arch/arm/boot/dts/sunxi-h3-h5.dtsi b/arch/arm/boot/dts/sunxi-h3-h5.dtsi
+index 8d40c00..af0fa3c 100644
+--- a/arch/arm/boot/dts/sunxi-h3-h5.dtsi
++++ b/arch/arm/boot/dts/sunxi-h3-h5.dtsi
+@@ -408,6 +408,7 @@
+ 			clock-names = "stmmaceth";
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			local-mac-address = [00 00 00 00 00 00];
+ 			status = "disabled";
+ 
+ 			mdio: mdio {
