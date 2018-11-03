@@ -17,7 +17,7 @@ diff --git a/arch/arm/boot/dts/sun8i-h3-nanopi.dtsi b/arch/arm/boot/dts/sun8i-h3
 index 7646e33..ab84b48 100644
 --- a/arch/arm/boot/dts/sun8i-h3-nanopi.dtsi
 +++ b/arch/arm/boot/dts/sun8i-h3-nanopi.dtsi
-@@ -132,6 +132,11 @@
+@@ -132,6 +132,12 @@
  	status = "okay";
  };
  
@@ -28,4 +28,5 @@ index 7646e33..ab84b48 100644
 +
  &usbphy {
  	status = "okay";
++	usb0_id_det-gpios = <&pio 6 12 GPIO_ACTIVE_HIGH>; /* PG12 */
  };
