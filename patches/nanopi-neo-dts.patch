@@ -12,7 +12,7 @@ index 78f6c24..fd8e369 100644
 +
  &emac {
  	phy-handle = <&int_mii_phy>;
-	phy-mode = "mii";
+ 	phy-mode = "mii";
 diff --git a/arch/arm/boot/dts/sun8i-h3-nanopi.dtsi b/arch/arm/boot/dts/sun8i-h3-nanopi.dtsi
 index 7646e33..ab84b48 100644
 --- a/arch/arm/boot/dts/sun8i-h3-nanopi.dtsi
