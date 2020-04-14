@@ -225,6 +225,7 @@ parts:
       snapcraftctl pull
       set -e
       echo "applying nanopi devicetree patches"
+      git apply -v ../../../patches/nand-pins.patch
       git apply -v ../../../patches/nanopi-air-wlan.patch
       git apply -v ../../../patches/nanopi-neo-dts.patch
       git apply -v ../../../patches/nanopi-mac-addr.patch

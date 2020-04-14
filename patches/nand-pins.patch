@@ -1,0 +1,42 @@
+diff --git a/arch/arm/boot/dts/sun8i-a23-a33.dtsi b/arch/arm/boot/dts/sun8i-a23-a33.dtsi
+index 5dc59d6..18c727f 100644
+--- a/arch/arm/boot/dts/sun8i-a23-a33.dtsi
++++ b/arch/arm/boot/dts/sun8i-a23-a33.dtsi
+@@ -317,6 +317,37 @@
+ 				bias-pull-up;
+ 			};
+ 
++			nand_pins: nand-pins {
++				pins = "PC0", "PC1", "PC2", "PC5",
++				       "PC8", "PC9", "PC10", "PC11",
++				       "PC12", "PC13", "PC14", "PC15";
++				function = "nand0";
++			};
++
++			nand_pins_cs0: nand-pins-cs0 {
++				pins = "PC4";
++				function = "nand0";
++				bias-pull-up;
++			};
++
++			nand_pins_cs1: nand-pins-cs1 {
++				pins = "PC3";
++				function = "nand0";
++				bias-pull-up;
++			};
++
++			nand_pins_rb0: nand-pins-rb0 {
++				pins = "PC6";
++				function = "nand0";
++				bias-pull-up;
++			};
++
++			nand_pins_rb1: nand-pins-rb1 {
++				pins = "PC7";
++				function = "nand0";
++				bias-pull-up;
++			};
++
+ 			pwm0_pins: pwm0 {
+ 				pins = "PH0";
+ 				function = "pwm0";
