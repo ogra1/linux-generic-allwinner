@@ -26,7 +26,7 @@ parts:
     source: git://kernel.ubuntu.com/ubuntu/ubuntu-bionic.git
     source-type: git
     source-depth: 1
-    source-tag: Ubuntu-4.15.0-191.202
+    source-tag: Ubuntu-4.15.0-192.203
     kconfigflavour: generic
     kconfigs:
       - CONFIG_DEBUG_INFO=n
